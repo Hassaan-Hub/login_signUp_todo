@@ -1,24 +1,27 @@
 // ---------- ARRAYS (database) ----------
-let users = [];
-let posts = [];
+let users = JSON.parse(localStorage.getItem("users")) || [];
+let posts = JSON.parse(localStorage.getItem("posts")) || [];
 let currentUser = null;
 
 
 // ---------- SIGNUP ----------
-function signup(){
+function signup(){  
   users.push({
     name: name.value,
     email: email.value,
     password: pass.value
   });
+
+  localStorage.setItem("users", JSON.stringify(users)); // SAVE USERS
+
   alert("Signup success");
 }
 
 
 // ---------- LOGIN ----------
 function login(){
-  let user = users.find(findsignup => 
-    findsignup.email === lEmail.value && findsignup.password === lPass.value
+  let user = users.find(s => 
+    s.email === lEmail.value && s.password === lPass.value
   );
 
   if(user){
@@ -31,6 +34,8 @@ function login(){
   }
 }
 
+
+// ---------- DATE TIME FUNCTION ----------
 function getDateTime(){
 
   let now = new Date();
@@ -48,12 +53,15 @@ function getDateTime(){
   return `${day}-${month}-${year} TIME ${hours}:${minutes} ${ampm}`;
 }
 
+
 // ---------- ADD POST ----------
 function addPost(){
   posts.push({
-    id: getDateTime(),
+    id: getDateTime(),   // tumhara same logic
     text: postInput.value
   });
+
+  localStorage.setItem("posts", JSON.stringify(posts)); // SAVE POSTS
 
   postInput.value = "";
   showPosts();
@@ -71,10 +79,11 @@ function showPosts(){
     // container
     let box = document.createElement("div");
 
-    // post DATETIME and TEXT
+    // post DATETIME
     let id = document.createElement("p");
     id.innerText = p.id;
     
+    // post TEXT
     let text = document.createElement("p");
     text.innerText = p.text;
 
@@ -84,6 +93,9 @@ function showPosts(){
 
     delBtn.onclick = function(){
       posts = posts.filter(x => x.id !== p.id);
+
+      localStorage.setItem("posts", JSON.stringify(posts)); // SAVE AFTER DELETE
+
       showPosts();
     }
 
@@ -95,18 +107,19 @@ function showPosts(){
       let newText = prompt("Edit post:");
       if(newText){
         p.text = newText;
-        // p.id = getDateTime(); // update id to reflect change
+
+        localStorage.setItem("posts", JSON.stringify(posts)); // SAVE AFTER EDIT
+
         showPosts();
       }
     }
 
-    // append sab box mein
+    // append
     box.appendChild(id);
     box.appendChild(text);
     box.appendChild(delBtn);
     box.appendChild(editBtn);
 
-    // screen pe lagao
     postsDiv.appendChild(box);
   });
 }
