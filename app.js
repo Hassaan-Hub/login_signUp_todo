@@ -17,7 +17,7 @@ function signup() {
 
     if (existingUser) {
       alert("Email already registered");
-    } 
+    }
     else {
       users.push({
         name: name.value,
@@ -66,10 +66,17 @@ function getDateTime() {
 
 // ---------- ADD POST ---------- 
 function addPost() {
+  if (postInput.value.trim() === "") {
+    alert("Write something first");
+    return;
+  }
+
   posts.push({
-    id: getDateTime(),
-    text: postInput.value
+    id: getDateTime(),   // better unique id
+    text: postInput.value,
+    date: getDateTime()
   });
+
   postInput.value = "";
   showPosts();
 }
