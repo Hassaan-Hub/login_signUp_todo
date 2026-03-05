@@ -4,13 +4,35 @@ let posts = [];
 let currentUser = null;
 
 // ---------- SIGNUP ---------- 
+// ---------- SIGNUP ---------- 
 function signup() {
-  users.push({
-    name: name.value,
-    email: email.value,
-    password: pass.value
-  });
-  alert("Signup success");
+
+  if (name.value === "" || email.value === "" || pass.value === "") {
+    alert("Please fill all fields");
+  } 
+  else {
+
+    // check if email already exists
+    let existingUser = users.find(u => u.email === email.value);
+
+    if (existingUser) {
+      alert("Email already registered");
+    } 
+    else {
+      users.push({
+        name: name.value,
+        email: email.value,
+        password: pass.value
+      });
+
+      alert("Signup success");
+
+      // clear inputs
+      name.value = "";
+      email.value = "";
+      pass.value = "";
+    }
+  }
 }
 
 // ---------- LOGIN ---------- 
