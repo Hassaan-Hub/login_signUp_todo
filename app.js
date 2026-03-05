@@ -3,7 +3,7 @@ let users = [];
 let posts = [];
 let currentUser = null;
 
-// ---------- SIGNUP ---------- 
+
 // ---------- SIGNUP ---------- 
 function signup() {
 
