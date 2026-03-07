@@ -1,33 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Post App</title>
+  <meta charset="UTF-8">
+  <title>Post App Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <div class="container">
 
-<h2>Signup</h2>
-<input id="name" placeholder="Name"><br><br>
-<input id="email" placeholder="Email"><br><br>
-<input id="pass" type="password" placeholder="Password"><br><br>
-<button onclick="signup()">Signup</button>
+    <header>
+      <h1>Post App</h1>
+      <div id="userInfo" class="user-info" style="display:none">
+        <span id="userAvatar" class="avatar"></span>
+        <span id="userName"></span>
+        <button id="logoutBtn" class="logout-btn" title="Logout">Logout</button>
+      </div>
+    </header>
 
-<h2>Login</h2>
-<input id="lEmail" placeholder="Email"><br><br>
-<input id="lPass" type="password" placeholder="Password"><br><br>
-<button onclick="login()">Login</button>
+    <main>
+      <section id="authSection">
+        <div class="auth-card">
+          <h2>Signup</h2>
+          <input id="name" placeholder="Name" autocomplete="off">
+          <input id="email" placeholder="Email" type="email" autocomplete="off">
+          <div class="password-field">
+            <input id="pass" type="password" placeholder="Password" autocomplete="off">
+            <span class="toggle-pass" onclick="togglePassword('pass')">👁️</span>
+          </div>
+          <button onclick="signup()">Signup</button>
+        </div>
+        <div class="auth-card">
+          <h2>Login</h2>
+          <input id="lEmail" placeholder="Email" type="email" autocomplete="off">
+          <div class="password-field">
+            <input id="lPass" type="password" placeholder="Password" autocomplete="off">
+            <span class="toggle-pass" onclick="togglePassword('lPass')">👁️</span>
+          </div>
+          <button onclick="login()">Login</button>
+        </div>
+      </section>
 
-<hr>
+      <section id="postSection" style="display:none">
+        <div class="add-post">
+          <input id="postInput" placeholder="Write a post...">
+          <button onclick="addPost()">Add</button>
+        </div>
+        <div class="posts-header">
+          <h2>Posts</h2>
+          <button onclick="clearAllPosts()" class="clear-btn">Clear All</button>
+        </div>
+        <div id="posts"></div>
+      </section>
+    </main>
 
-<div id="postSection" style="display:none">
-  <h2>Add Post</h2>
-  <input id="postInput" placeholder="Write post">
-  <button onclick="addPost()">Add</button>
-
-  <h2>Posts</h2>
-  <div id="posts"></div>
-</div>
-
-<script src="app.js"></script>
+    <div id="toast"></div>
+  </div>
+  <script src="app.js"></script>
 </body>
+
 </html>
