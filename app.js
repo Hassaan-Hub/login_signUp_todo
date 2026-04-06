@@ -80,6 +80,8 @@ function login() {
   } else {
     showToast("Wrong email or password", "#ff5858");
   }
+  lEmail.value = "";
+  lPass.value = "";
 }
 
 // ---------- LOGOUT ----------
